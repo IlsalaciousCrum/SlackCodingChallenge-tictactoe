@@ -1,0 +1,69 @@
+Links to keep track of:
+https://api.slack.com/docs/message-formatting#multiline_messages
+
+{ "text": "This is a line of text.\nAnd this is another one."}
+
+The ability to use an emoji:
+https://get.slack.help/hc/en-us/articles/202931348-Emoji-and-emoticons
+
+------------------------------------
+
+Only 1 game can be played at a time so I don't think I need a database. Maybe just a dictionary? The key is the column-row designation and the value is the emoticon
+
+Data to store:
+Board: A dictionary of key value pairs:
+a1: ":one:"
+a2: ":two:"
+a3: ":three:"
+b1: ":four:"
+b2: ":five:"
+b3: ":six:"
+c1: ":seven:"
+c2: ":eight:"
+c3: ":nine:"
+Player1: ":heavy_multiplication_x:"
+Player2: ":o:"
+Turn: beginning default is Player2
+Game: True
+
+- Anyone can call up the board
+    - When called, this shows who is playing, what their avatars are and whose turn it is
+- Only the user whose turn it is can make a move
+- No one can start a new game while a game is still in play
+- Instead of playing, either player can "forfeit" and get rid of the game, opening it up to someone else to play. Forfeiting declares the other person the winner
+
+Functions I need:
+
+-  Player 1 initializes the game, picks their emoji avatar and challenges another user to a game
+    - Display avatar options
+    - Error handling for not entering a valid emoji option - Has to be in this list and not a number:
+        - http://www.webpagefx.com/tools/emoji-cheat-sheet/
+    - Error handling for bad player name (may not even need this, not add on first pass. Not even sure how that would work?)
+- Player 2 accepts the challenge and picks an avatar
+    - Can't chose the same avatar as player 1
+- Playing your move:
+    - Displays the board and announces whose turn it is. This should announce it in a way that sends a message or pings the next player. Maybe it calls the players name and then shows the board
+- After each turn, my app checks to see if there is a winner before continuing. If there is a winner:
+    - it announces the winner
+    - Does some kind of victory dance
+    - Resets the dictionary back to the starting values
+
+---------
+Requirements:
+
+- Users can create a new game in any Slack channel by challenging another user (using their @username).
+- A channel can have at most one game being played at a time.
+- Anyone in the channel can run a command to display the current board and list whose turn it is.
+- Users can specify their next move, which also publicly displays the board in the channel after the move with a reminder of whose turn it is.
+- Only the user whose turn it is can make the next move.
+- When a turn is taken that ends the game, the response indicates this along with who won.
+
+Procedures:
+
+Procedures
+-Check your e-mail for a Slack invite to a testing team where you can test and install your slash command. Please play one complete game in the #general channel so that we can see the history.
+-Once submitted, we'll be using your slash command and trying out game play only on the testing team set up above (we won't be installing it on other teams).
+-You can use any technologies of your choice. We will provide a server running a LAMP stack if you wish to get up and running quickly (just ask us via email), but also feel free to use your own server or other hosting services such as Heroku or Google App Engine.
+-Please provide all source code via a Git repository – create a local repo for your code, and when the exercise is complete, please tar or zip your main directory and send it along to us (and please remember to include your .git directory/files).
+-We will be looking at functionality, code style, code layout, readability, documentation, and data modeling. If you find that completing the exercise is taking more time than you'd reasonably expect, please let us know via email; we are happy to work with you.
+-This is the primary way we evaluate your technical skills, so the finished product should be something you're proud to show us!

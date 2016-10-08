@@ -1,0 +1,4 @@
+*slack*
+*.pyc
+secrets.sh
+.DS_Store
