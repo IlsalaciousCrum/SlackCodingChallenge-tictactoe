@@ -1,3 +1,7 @@
+https://api.slack.com/slash-commands
+"Since custom commands on your own team have fewer restrictions than app commands, we recommend that developers start by creating a custom command for testing and development and import it to an app when they are ready to release it."
+
+
 Links to keep track of:
 https://api.slack.com/docs/message-formatting#multiline_messages
 
