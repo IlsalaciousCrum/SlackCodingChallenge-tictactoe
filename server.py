@@ -21,11 +21,11 @@ def test():
     return html
 
 
-@app.route('/.well-known/acme-challenge/6hw3f7_xsL--3pUcp8IJGY1aoR8xZF_ZaeOhBn02Fhs', methods=['GET'])
+@app.route('/.well-known/acme-challenge/PC2wJrKvJNFvbM_6K5bZ9wgH-uFWpH2bUv1EaIOz57U', methods=['GET'])
 def acme():
     """Testing to see if this site is deployed on Heroku"""
 
-    html = "<html><body>W_UpLWfBEjHfFCdaY28q1UTaPRH5bWxKlUju2m-sGxU.ecIxhAtF13SyMysgf2q8wrMZCcfF9-XUpp2Mpj1Wefk</body></html>"
+    html = "<html><body>PC2wJrKvJNFvbM_6K5bZ9wgH-uFWpH2bUv1EaIOz57U.ecIxhAtF13SyMysgf2q8wrMZCcfF9-XUpp2Mpj1Wefk</body></html>"
     return html
 
 
