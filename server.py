@@ -13,6 +13,14 @@ app.secret_key = os.environ['APP_SECRET_KEY']
 # ___________________________________________________________________________
 
 
+@app.route('/test', methods=['GET'])
+def test():
+    """Testing to see if this site is deployed on Heroku"""
+
+    html = "<html><body>Testing testing, is this thing on?</body></html>"
+    return html
+
+
 @app.route('/new_game', methods=['POST'])
 def new_game():
     '''Recieves a slash command to start a new game'''
