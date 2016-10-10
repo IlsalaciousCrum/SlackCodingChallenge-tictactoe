@@ -329,7 +329,6 @@
 :green_book:
 :green_heart:
 :grey_exclamation:
-:grey_question:
 :grimacing:
 :grin:
 :grinning:
