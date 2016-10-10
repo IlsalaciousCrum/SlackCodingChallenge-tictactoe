@@ -21,6 +21,14 @@ def test():
     return html
 
 
+@app.route('/.well-known/acme-challenge/SU9p8-K8mqqHzRPvh3ocdcloLTaYkJftr_LcU5NOHAo', methods=['GET'])
+def acme():
+    """Testing to see if this site is deployed on Heroku"""
+
+    html = "<html><body>SU9p8-K8mqqHzRPvh3ocdcloLTaYkJftr_LcU5NOHAo.A8ScxIDy_TDWez5RKFU8jiL1CzZTfN6jP2fsDN7LWnY</body></html>"
+    return html
+
+
 @app.route('/new_game', methods=['POST'])
 def new_game():
     '''Recieves a slash command to start a new game'''
