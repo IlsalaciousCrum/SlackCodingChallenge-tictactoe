@@ -8,6 +8,8 @@ import valid_emojis
 
 import os
 
+import requests
+
 app = Flask(__name__)
 
 app.secret_key = os.environ['APP_SECRET_KEY']
@@ -38,6 +40,25 @@ def new_game():
     text = request.data["text"]
     response_url = request.data["response_url"]
 
+    print (token, team_id,
+           team_domain,
+           channel_id,
+           channel_name,
+           user_id,
+           user_name,
+           command,
+           text,
+           response_url)
+
+    url = response_url
+    headers = {'Content-type': 'application/json'}
+    payload = {'text': 'Slash command recieved. Cats rule!'}
+    r = requests.post(url, headers=headers, data=payload)
+
+    print r
+
+    return (payload, 200)
+
     # token = "gIkuvaNzQIHg97ATvDxqgjtO"
     # team_id = "T0001"
     # team_domain = "example"
@@ -49,7 +70,7 @@ def new_game():
     # text = "94070"
     # response_url = "https://hooks.slack.com/commands/1234/5678"
 
-    if token == slack_token:
+    # if token == slack_token:
         # execute the command
 
         # If you'd like to add HTTP headers to a request, simply pass in a dict to the headers parameter.
@@ -65,16 +86,16 @@ def new_game():
          # r = requests.post('http://httpbin.org/post', data = {'key':'value'})'
 
          # http://flask.pocoo.org/docs/0.11/quickstart/#about-responses
-         
-        pass
 
-    else:
-        # error message or pass. The request did not come from Slack.
-        # "Additionally, you can verify whether the team_id matches a
-        # team that has approved your command for usage.
-        # If the token or team are unknown to your application, you should
-        # refuse to service the request and return an error instead."
-        pass
+    #     pass
+
+    # else:
+    #     # error message or pass. The request did not come from Slack.
+    #     # "Additionally, you can verify whether the team_id matches a
+    #     # team that has approved your command for usage.
+    #     # If the token or team are unknown to your application, you should
+    #     # refuse to service the request and return an error instead."
+    #     pass
 
 # ___________________________________________________________________________
 
