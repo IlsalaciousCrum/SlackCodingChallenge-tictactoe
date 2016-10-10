@@ -10,8 +10,6 @@ app = Flask(__name__)
 
 app.secret_key = os.environ['APP_SECRET_KEY']
 
-slack_token = os.environ['SLACK_TOKEN']
-
 # ___________________________________________________________________________
 
 
