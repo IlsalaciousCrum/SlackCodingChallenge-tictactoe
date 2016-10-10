@@ -21,7 +21,7 @@ def test():
     return html
 
 
-@app.route('/.well-known/acme-challenge/W_UpLWfBEjHfFCdaY28q1UTaPRH5bWxKlUju2m-sGxU', methods=['GET'])
+@app.route('/.well-known/acme-challenge/6hw3f7_xsL--3pUcp8IJGY1aoR8xZF_ZaeOhBn02Fhs', methods=['GET'])
 def acme():
     """Testing to see if this site is deployed on Heroku"""
 
