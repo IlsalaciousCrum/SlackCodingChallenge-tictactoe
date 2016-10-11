@@ -130,7 +130,7 @@ def load_emoji():
 
     print "loading emojis"
 
-    for i, row in enumerate(open("valid_emojis")):
+    for i, row in enumerate(open("seed_data/valid_emojis")):
         emoji = row.rstrip()
 
         emoji = Emoji(emoji=emoji)
