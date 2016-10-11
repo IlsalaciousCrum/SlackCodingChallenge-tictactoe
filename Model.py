@@ -114,7 +114,7 @@ class Emoji(db.Model):
 def connect_to_db(app):
     '''Connect the database to our Flask app.'''
 
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///oxo'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres:///oxo'
     db.app = app
     db.init_app(app)
 
