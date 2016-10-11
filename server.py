@@ -1,21 +1,24 @@
 """Slack Slash Command TicTacToe"""
 
-from flask import Flask, request
+from flask import Flask, request, jsonify, status
 
 import os
 
 import requests
 
-from Model import Game
+from Model import (connect_to_db, db, Game, Emoji, Player)
 
-import valid_emojis.txt
+# ___________________________________________________________________________
 
 app = Flask(__name__)
 
 app.secret_key = os.environ['APP_SECRET_KEY']
 
+slack_token = os.environ['SLACK_TOKEN']
+
 # ___________________________________________________________________________
 
+show_help = {"text": "*How to play OXO Emoji Tic-Tac-Toe:*\n-Challenge anyone on your team to a game by entering `/ttt` and your opponents username in any channel, e.g. `/ttt kenny`. There is one game per channel, at a time.\n- By default, your moves will show as :heavy_multiplication_x: and your opponents moves will show as :O:.  To change the emoji that represents your moves, type `/ttt` and the emoji you would like to use, e.g. `/ttt :alien:`. If the emoji you chose has aleady been chosen by another player, your emoji will not be updated.\n- Anyone can type `/ttt` at any time to show the game board and whose turn it is, but only the person whose turn it is can make a move.\n- To make your move, type `/ttt` and the number of the square you would like to claim, e.g. `/ttt 1`.\n- To end the game prematurely, type `/ttt catsgame`\n- To see this message again,type `/ttt help`\nThis:\n\n:one:|:two:|:three:\n:four:|:five:|:six:\n:seven:|:eight:|:nine:\n\n Quickly turns into this:\n\n :ghost:|:alien:|:three:\n:four:|:ghost:|:six:\n:alien:|:alien:|:ghost:"}
 
 @app.route('/test', methods=['GET'])
 def test():
@@ -25,45 +28,51 @@ def test():
     return html
 
 
-@app.route('/new_game', methods=['POST'])
+@app.route('/game.json', methods=['POST', 'GET'])
 def new_game():
-    '''Recieves a slash command to start a new game'''
-
-    # This area is commented out because the app is not live, the test data
-    # below it for development purposes should be removed before deployment.
-
-    # I think request.data is the right form but http://flask.pocoo.org/docs/0.11/api/#flask.Request
-    #  can be consulted for further forms
+    '''Processes slash commands to play Tic-Tac-Toe'''
 
     token = request.data["token"]
-    team_id = request.data["team_id"]
-    team_domain = request.data["team_domain"]
-    channel_id = request.data["channel_id"]
-    channel_name = request.data["channel_name"]
-    user_id = request.data["user_id"]
-    user_name = request.data["user_name"]
-    command = request.data["command"]
-    text = request.data["text"]
-    response_url = request.data["response_url"]
+    if token == slack_token:
+        text = request.data["text"]
+        if text == "help":
+            return jsonify(show_help)
+    #     team_domain = request.data["team_domain"]
+    #     domain = team_domain
+    #     channel_id = request.data["channel_id"]
+    #     channel_name = request.data["channel_name"]
+    #     user_id = request.data["user_id"]
+    #     user_name = request.data["user_name"]
+    #     if text[0] == "@":
+    #         domain = Game(player_one_user_name=user_name,
+    #                   player_two_user_name=text,
+    #                   channel_name=channel_name,
+    #                   player_one_user_id=user_id,
+    #                   )
+    # elif text[0] ==":":
 
-    print (token, team_id,
-           team_domain,
-           channel_id,
-           channel_name,
-           user_id,
-           user_name,
-           command,
-           text,
-           response_url)
 
-    url = response_url
-    headers = {'Content-type': 'application/json'}
-    payload = {'text': 'Slash command recieved. Cats rule!'}
-    r = requests.post(url, headers=headers, data=payload)
+    #     print (token, text, team_domain,
+    #            team_domain,
+    #            domain,
+    #            channel_name,
+    #            user_id,
+    #            user_name,
+    #            command,
+    #            text,
+    #            response_url)
 
-    print r
+    #     url = response_url
+    #     headers = {'Content-type': 'application/json'}
+    #     payload = {'text': 'Slash command recieved. Cats rule!'}
+    #     r = requests.post(url, headers=headers, data=payload)
 
-    return (payload, 200)
+    #     print r
+
+    #     return jsonify(payload), status.HTTP_200_OK
+    # else:
+    #     payload = {'text': 'Not a valid token.'}
+    #     return jsonify(payload), status.HTTP_400_BAD_REQUEST
 
     # token = "gIkuvaNzQIHg97ATvDxqgjtO"
     # team_id = "T0001"
@@ -76,7 +85,6 @@ def new_game():
     # text = "94070"
     # response_url = "https://hooks.slack.com/commands/1234/5678"
 
-    # if token == slack_token:
         # execute the command
 
         # If you'd like to add HTTP headers to a request, simply pass in a dict to the headers parameter.
@@ -107,6 +115,8 @@ def new_game():
 
 
 if __name__ == "__main__":
+
+    connect_to_db(app)
 
     app.debug = True
 
