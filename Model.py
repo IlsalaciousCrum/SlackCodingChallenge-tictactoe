@@ -1,5 +1,5 @@
 """Models for Slack TicTacToe Coding Challenge"""
-from flask import Flask, current_app
+
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
@@ -115,7 +115,6 @@ class Emoji(db.Model):
 def connect_to_db(app, db_uri=None):
     '''Connect the database to Flask app.'''
 
-    app = Flask("app")
     app.config['SQLALCHEMY_DATABASE_URI'] = db_uri or 'postgres:///oxo'
     db.app = app
     db.init_app(app)
