@@ -6,6 +6,10 @@ import os
 
 import requests
 
+from Model import Game
+
+import valid_emojis.txt
+
 app = Flask(__name__)
 
 app.secret_key = os.environ['APP_SECRET_KEY']
@@ -18,22 +22,6 @@ def test():
     """Testing to see if this site is deployed on Heroku"""
 
     html = "<html><body>Testing testing, is this thing on?</body></html>"
-    return html
-
-
-@app.route('/.well-known/acme-challenge/8tLbjQY-l--Cf7IbfNTevHShlycUFcyuY5Ha33YrRDY', methods=['GET'])
-def acme():
-    """Testing to see if this site is deployed on Heroku"""
-
-    html = "8tLbjQY-l--Cf7IbfNTevHShlycUFcyuY5Ha33YrRDY.ecIxhAtF13SyMysgf2q8wrMZCcfF9-XUpp2Mpj1Wefk"
-    return html
-
-
-@app.route('/.well-known/acme-challenge/ZymIUwUytYMOoNJFOz69rnN2xd7kyShjbTmDdxhWWLQ', methods=['GET'])
-def acme2():
-    """Testing to see if this site is deployed on Heroku"""
-
-    html = "ZymIUwUytYMOoNJFOz69rnN2xd7kyShjbTmDdxhWWLQ.ecIxhAtF13SyMysgf2q8wrMZCcfF9-XUpp2Mpj1Wefk"
     return html
 
 
