@@ -105,7 +105,7 @@ class Emoji(db.Model):
     emoji_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     emoji = db.Column(db.String(64), nullable=False, unique=True)
 
-    players = db.relationship('Players')
+    players = db.relationship('Player')
 
 
 ##############################################################################
