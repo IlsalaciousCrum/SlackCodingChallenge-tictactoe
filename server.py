@@ -8,6 +8,25 @@ import os
 
 from Model import (connect_to_db, db, Game, Emoji, Player)
 
+def load_emoji():
+    """Loads the emojis from a seed file"""
+
+    print "loading emojis"
+
+    for i, row in enumerate(open("seed_data/valid_emojis")):
+        emoji = row.rstrip()
+
+        emoji = Emoji(emoji=emoji)
+        db.session.add(emoji)
+
+        # provide some sense of progress
+        if i % 100 == 0:
+            print i
+
+    db.session.commit()
+    print "emojis loaded"
+load_emoji()
+
 # ___________________________________________________________________________
 
 app = Flask(__name__)
