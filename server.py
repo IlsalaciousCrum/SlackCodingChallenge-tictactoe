@@ -64,8 +64,7 @@ app.add_url_rule('/game.json', view_func=slack.dispatch)
 #     else:
 #         return 'I don\'t know that one. Enter \'/ttt help\' to see valid commands'
 
-@slack.command('/ttt', token=slack_token, team_id='team_id": "T2LQ2JYJF',
-               methods=['POST', 'GET'])
+@slack.command('/ttt', token=slack_token, methods=['POST', 'GET'])
 def new_game(**kwargs):
     text = kwargs.get('text')
     saying = {"text": "Testing to see if this other method is working. The text that was sent is %s" % text}
