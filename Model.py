@@ -112,15 +112,6 @@ class Emoji(db.Model):
 ##############################################################################
 # Database Helper functions
 
-def load_emoji():
-    """Loads the emojis from a seed file"""
-
-    for row in (open("seed_data/valid_emojis")):
-        row = row.rstrip()
-        this_emoji = Emoji(emoji=row)
-        db.session.add(this_emoji)
-        db.session.commit()
-
 
 def connect_to_db(app, db_uri=None):
     '''Connect the database to Flask app.'''
