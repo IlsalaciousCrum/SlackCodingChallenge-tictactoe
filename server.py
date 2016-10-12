@@ -43,9 +43,9 @@ def new_game():
     '''Processes slash commands to play Tic-Tac-Toe'''
 
     cheese = requests.get_json(force=True)
-    file = open("json.txt", "w")
-    file.write(cheese)
-    file.close()
+    stuff = open("json.txt", "w")
+    stuff.write(cheese)
+    stuff.close()
 
 
 
