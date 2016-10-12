@@ -48,6 +48,8 @@ def test():
     """Testing to see if this site is deployed on Heroku"""
 
     html = "<html><body>Testing testing, is this thing on?</body></html>"
+    rage = Emoji(emoji=":rage:")
+
     return html
 
 
