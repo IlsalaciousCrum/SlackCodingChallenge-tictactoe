@@ -47,7 +47,6 @@ def new_game():
 
     cheese = get_json(force=True)
 
-    raise Exception
     token = request.data["token"]
     if token == slack_token:
         text = request.data["text"]
