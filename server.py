@@ -26,13 +26,14 @@ def test():
     """Testing to see if this site is deployed on Heroku"""
 
     html = "<html><body>Testing testing, is this thing on?</body></html>"
-
     #  Pretty silly, but this is how I loaded my seed data for the emojis
-    #  for row in (open("valid_emojis.txt")):
-    #     row = row.rstrip()
-    #     this_emoji = Emoji(emoji=row)
-    #     db.session.add(this_emoji)
-    #     db.session.commit()
+    #  because I had trouble with the Heroku python CLI
+
+    for row in (open("valid_emojis.txt")):
+        row = row.rstrip()
+        this_emoji = Emoji(emoji=row)
+        db.session.add(this_emoji)
+        db.session.commit()
 
     return html
 
