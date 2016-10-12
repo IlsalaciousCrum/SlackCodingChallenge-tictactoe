@@ -2,10 +2,7 @@
 *.pyc
 secret.sh
 .DS_Store
-Further Development.txt
 Working area.py
-notes.txt
 *letsencrypt*
 helper_functions.py
-testy.py
-untitled
+json.txt

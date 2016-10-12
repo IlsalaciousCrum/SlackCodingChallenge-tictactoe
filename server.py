@@ -1,12 +1,10 @@
 """Slack Slash Command TicTacToe"""
 
-from jinja2 import StrictUndefined
-
 from flask import Flask, request, jsonify
 
 import os
 
-# import requests
+import requests
 
 from Model import (connect_to_db, db, Game, Emoji, Player)
 
@@ -22,7 +20,6 @@ slack_token = os.environ['SLACK_TOKEN']
 
 show_help = {"text": "*How to play OXO Emoji Tic-Tac-Toe:*\n-Challenge anyone on your team to a game by entering `/ttt` and your opponents username in any channel, e.g. `/ttt kenny`. There is one game per channel, at a time.\n- By default, your moves will show as :heavy_multiplication_x: and your opponents moves will show as :O:.  To change the emoji that represents your moves, type `/ttt` and the emoji you would like to use, e.g. `/ttt :alien:`. If the emoji you chose has aleady been chosen by another player, your emoji will not be updated.\n- Anyone can type `/ttt` at any time to show the game board and whose turn it is, but only the person whose turn it is can make a move.\n- To make your move, type `/ttt` and the number of the square you would like to claim, e.g. `/ttt 1`.\n- To end the game prematurely, type `/ttt catsgame`\n- To see this message again,type `/ttt help`\nThis:\n\n:one:|:two:|:three:\n:four:|:five:|:six:\n:seven:|:eight:|:nine:\n\n Quickly turns into this:\n\n :ghost:|:alien:|:three:\n:four:|:ghost:|:six:\n:alien:|:alien:|:ghost:"}
 
-app.jinja_env.undefined = StrictUndefined
 
 @app.route('/test', methods=['GET'])
 def test():
@@ -45,13 +42,18 @@ def test():
 def new_game():
     '''Processes slash commands to play Tic-Tac-Toe'''
 
-    cheese = get_json(force=True)
+    cheese = requests.get_json(force=True)
+    file = open("json.txt", "w")
+    file.write(cheese)
+    file.close()
 
-    token = request.data["token"]
-    if token == slack_token:
-        text = request.data["text"]
-        if text == "help":
-            return jsonify(show_help)
+
+
+    # token = request.data["token"]
+    # if token == slack_token:
+    #     text = request.data["text"]
+    #     if text == "help":
+    #         return jsonify(show_help)
     #     team_domain = request.data["team_domain"]
     #     domain = team_domain
     #     channel_id = request.data["channel_id"]
