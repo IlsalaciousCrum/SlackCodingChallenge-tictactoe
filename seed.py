@@ -1,6 +1,6 @@
 """Utility file to seed Tic-Tac-Toe database with emojis"""
 
-from model import Emoji
+from Model import Emoji
 from server import (app, db)
 
 # "heroku run python manage.py shell" to access heroku's python shell to run this file
