@@ -24,20 +24,11 @@ slack_token = os.environ['SLACK_TOKEN']
 def load_emoji():
     """Loads the emojis from a seed file"""
 
-    print "loading emojis"
-
-    for i, row in enumerate(open("seed_data/valid_emojis")):
+    for row in (open("seed_data/valid_emojis")):
         row = row.rstrip()
-
         this_emoji = Emoji(emoji=row)
         db.session.add(this_emoji)
-
-        # provide some sense of progress
-        if i % 100 == 0:
-            print i
-
-    db.session.commit()
-    print "emojis loaded"
+        db.session.commit()
 
 load_emoji()
 
