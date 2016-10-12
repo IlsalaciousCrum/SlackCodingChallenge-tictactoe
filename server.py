@@ -49,6 +49,8 @@ def test():
 
     html = "<html><body>Testing testing, is this thing on?</body></html>"
     rage = Emoji(emoji=":rage:")
+    db.session.add(rage)
+    db.session.commit()
 
     return html
 
