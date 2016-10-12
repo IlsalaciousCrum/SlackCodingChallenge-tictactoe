@@ -27,7 +27,7 @@ def test():
 
     html = "<html><body>Testing testing, is this thing on?</body></html>"
 
-    for row in (open("valid_emojis")):
+    for row in (open("valid_emojis.txt")):
         row = row.rstrip()
         this_emoji = Emoji(emoji=row)
         db.session.add(this_emoji)
