@@ -1,6 +1,6 @@
 """Slack Slash Command TicTacToe"""
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, make_response
 
 # from flask_slack import Slack
 
