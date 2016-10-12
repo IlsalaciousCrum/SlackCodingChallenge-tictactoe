@@ -42,6 +42,9 @@ def test():
 def new_game():
     '''Processes slash commands to play Tic-Tac-Toe'''
 
+    cheese = get_json(force=True)
+
+    raise Exception
     token = request.data["token"]
     if token == slack_token:
         text = request.data["text"]
