@@ -2,6 +2,8 @@
 
 from flask import Flask, request, jsonify
 
+# from flask_slack import Slack
+
 import os
 
 import requests
@@ -16,16 +18,19 @@ app.secret_key = os.environ['APP_SECRET_KEY']
 
 slack_token = os.environ['SLACK_TOKEN']
 
+# slack = Slack(app)
+# app.add_url_rule('/game.json', view_func=slack.dispatch)
+
 # ___________________________________________________________________________
 
-show_help = {"text": "*How to play OXO Emoji Tic-Tac-Toe:*\n-Challenge anyone on your team to a game by entering `/ttt` and your opponents username in any channel, e.g. `/ttt kenny`. There is one game per channel, at a time.\n- By default, your moves will show as :heavy_multiplication_x: and your opponents moves will show as :O:.  To change the emoji that represents your moves, type `/ttt` and the emoji you would like to use, e.g. `/ttt :alien:`. If the emoji you chose has aleady been chosen by another player, your emoji will not be updated.\n- Anyone can type `/ttt` at any time to show the game board and whose turn it is, but only the person whose turn it is can make a move.\n- To make your move, type `/ttt` and the number of the square you would like to claim, e.g. `/ttt 1`.\n- To end the game prematurely, type `/ttt catsgame`\n- To see this message again,type `/ttt help`\nThis:\n\n:one:|:two:|:three:\n:four:|:five:|:six:\n:seven:|:eight:|:nine:\n\n Quickly turns into this:\n\n :ghost:|:alien:|:three:\n:four:|:ghost:|:six:\n:alien:|:alien:|:ghost:"}
+# show_help = {"text": "*How to play OXO Emoji Tic-Tac-Toe:*\n-Challenge anyone on your team to a game by entering `/ttt` and your opponents username in any channel, e.g. `/ttt kenny`. There is one game per channel, at a time.\n- By default, your moves will show as :heavy_multiplication_x: and your opponents moves will show as :O:.  To change the emoji that represents your moves, type `/ttt` and the emoji you would like to use, e.g. `/ttt :alien:`. If the emoji you chose has aleady been chosen by another player, your emoji will not be updated.\n- Anyone can type `/ttt` at any time to show the game board and whose turn it is, but only the person whose turn it is can make a move.\n- To make your move, type `/ttt` and the number of the square you would like to claim, e.g. `/ttt 1`.\n- To end the game prematurely, type `/ttt catsgame`\n- To see this message again,type `/ttt help`\nThis:\n\n:one:|:two:|:three:\n:four:|:five:|:six:\n:seven:|:eight:|:nine:\n\n Quickly turns into this:\n\n :ghost:|:alien:|:three:\n:four:|:ghost:|:six:\n:alien:|:alien:|:ghost:"}
 
 
-@app.route('/test', methods=['GET'])
-def test():
-    """Testing to see if this site is deployed on Heroku"""
+# @app.route('/test', methods=['GET'])
+# def test():
+#     """Testing to see if this site is deployed on Heroku"""
 
-    html = "<html><body>Testing testing, is this thing on?</body></html>"
+#     html = "<html><body>Testing testing, is this thing on?</body></html>"
     #  Pretty silly, but this is how I loaded my seed data for the emojis
     #  because I had trouble with the Heroku python CLI
 
@@ -35,17 +40,24 @@ def test():
     #     db.session.add(this_emoji)
     #     db.session.commit()
 
-    return html
+    # return html
 
 
-@app.route('/game.json', methods=['POST', 'GET'])
+# @slack.command('/ttt', token= slack_token, team_id="T2LQ2JYJF", methods=['POST'])
+# def show_help(**kwargs):
+#     text = kwargs.get('text')
+#     return slack.response(text)
+
+@app.route('/game.json', methods=['POST'])
 def new_game():
     '''Processes slash commands to play Tic-Tac-Toe'''
+    return 'Hello Slack!'
 
-    cheese = requests.get_json(force=True)
-    stuff = open("json.txt", "w")
-    stuff.write(cheese)
-    stuff.close()
+
+    # cheese = requests.get_json(force=True)
+    # stuff = open("json.txt", "w")
+    # stuff.write(cheese)
+    # stuff.close()
 
 
 
