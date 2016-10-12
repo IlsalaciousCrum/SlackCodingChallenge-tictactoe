@@ -2,7 +2,7 @@
 
 from flask import Flask, request, make_response
 
-from flask_slack import Slack
+# from flask_slack import Slack
 
 import os
 
@@ -20,8 +20,8 @@ app.secret_key = os.environ['APP_SECRET_KEY']
 
 slack_token = os.environ['SLACK_TOKEN']
 
-slack = Slack(app)
-app.add_url_rule('/game.json', view_func=slack.dispatch)
+# slack = Slack(app)
+# app.add_url_rule('/game.json', view_func=slack.dispatch)
 
 # ___________________________________________________________________________
 
@@ -41,35 +41,46 @@ app.add_url_rule('/game.json', view_func=slack.dispatch)
 
     # return html
 
-# @app.route('/game.json', methods=['POST'])
-# def new_game():
-#     '''Processes slash commands to play Tic-Tac-Toe'''
+@app.route('/game.json', methods=['POST'])
+def new_game():
+    '''Processes slash commands to play Tic-Tac-Toe'''
 
-#     data = request.form
-#     query_text = data['text']
-#     if query_text == "help":
+    data = request.form
+    query_text = data['text']
+    team_id = data['team_id']
+    channel_id = data['channel_id']
+    channel_name = ['channel_name']
+    token = data['token']
+    team_domain = data['team_domain']
+    user_id = data['user_id']
+    username = data['user_name']
 
-#         payload = {"text": "*How to play OXO Emoji Tic-Tac-Toe:*\n-Challenge anyone on your team to a game by entering `/ttt` and your opponents username in any channel, e.g. `/ttt kenny`. There is one game per channel, at a time.\n- By default, your moves will show as :heavy_multiplication_x: and your opponents moves will show as :O:.  To change the emoji that represents your moves, type `/ttt` and the emoji you would like to use, e.g. `/ttt :alien:`. If the emoji you chose has aleady been chosen by another player, your emoji will not be updated.\n- Anyone can type `/ttt` at any time to show the game board and whose turn it is, but only the person whose turn it is can make a move.\n- To make your move, type `/ttt` and the number of the square you would like to claim, e.g. `/ttt 1`.\n- To end the game prematurely, type `/ttt catsgame`\n- To see this message again,type `/ttt help`\nThis:\n\n:one:|:two:|:three:\n:four:|:five:|:six:\n:seven:|:eight:|:nine:\n\n Quickly turns into this:\n\n :ghost:|:alien:|:three:\n:four:|:ghost:|:six:\n:alien:|:alien:|:ghost:"}
+    return 'query_text={0}, team_id={1}, channel_id={2}, channel_name={3}, token={4}, team_domain={5}, user_id={6}, username={7}'.format(query_text, team_id, channel_id, channel_name, token, team_domain, user_id, username)
 
-#         # dump that dictionary to json
-#         json_payload = json.dumps(payload)
+    # if query_text == "help":
 
-#         # JSON response must have json header for Slack
-#         # update this to use flask.jsonify()
-#         # http://stackoverflow.com/questions/7907596/json-dumps-vs-flask-jsonify
-#         response = make_response(json_payload)
-#         response.headers['content-type'] = 'application/json'
+    #     payload = {"text": "*How to play OXO Emoji Tic-Tac-Toe:*\n-Challenge anyone on your team to a game by entering `/ttt` and your opponents username in any channel, e.g. `/ttt kenny`. There is one game per channel, at a time.\n- By default, your moves will show as :heavy_multiplication_x: and your opponents moves will show as :O:.  To change the emoji that represents your moves, type `/ttt` and the emoji you would like to use, e.g. `/ttt :alien:`. If the emoji you chose has aleady been chosen by another player, your emoji will not be updated.\n- Anyone can type `/ttt` at any time to show the game board and whose turn it is, but only the person whose turn it is can make a move.\n- To make your move, type `/ttt` and the number of the square you would like to claim, e.g. `/ttt 1`.\n- To end the game prematurely, type `/ttt catsgame`\n- To see this message again,type `/ttt help`\nThis:\n\n:one:|:two:|:three:\n:four:|:five:|:six:\n:seven:|:eight:|:nine:\n\n Quickly turns into this:\n\n :ghost:|:alien:|:three:\n:four:|:ghost:|:six:\n:alien:|:alien:|:ghost:"}
 
-#         return response
-#     else:
-#         return 'I don\'t know that one. Enter \'/ttt help\' to see valid commands'
+    #     # dump that dictionary to json
+    #     json_payload = json.dumps(payload)
 
-@slack.command('ttt', token=slack_token, team_id='team_id": "T2LQ2JYJF',
-               methods=['POST', 'GET'])
-def new_game(**kwargs):
-    text = kwargs.get('text')
-    saying = {"text": "Testing to see if this other method is working. The text that was sent is %s" % text}
-    return slack.response(saying)
+    #     # JSON response must have json header for Slack
+    #     # update this to use flask.jsonify()
+    #     # http://stackoverflow.com/questions/7907596/json-dumps-vs-flask-jsonify
+    #     response = make_response(json_payload)
+    #     response.headers['content-type'] = 'application/json'
+
+    #     return response
+    # else:
+    #     return 'I don\'t know that one. Enter \'/ttt help\' to see valid commands'
+
+
+# @slack.command('ttt', token=slack_token, team_id='team_id": "T2LQ2JYJF',
+#                methods=['POST', 'GET'])
+# def new_game(**kwargs):
+#     text = kwargs.get('text')
+#     saying = {"text": "Testing to see if this other method is working. The text that was sent is %s" % text}
+#     return slack.response(saying)
 
 # ___________________________________________________________________________
 
