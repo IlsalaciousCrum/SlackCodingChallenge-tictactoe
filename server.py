@@ -29,11 +29,11 @@ def test():
     #  Pretty silly, but this is how I loaded my seed data for the emojis
     #  because I had trouble with the Heroku python CLI
 
-    for row in (open("valid_emojis.txt")):
-        row = row.rstrip()
-        this_emoji = Emoji(emoji=row)
-        db.session.add(this_emoji)
-        db.session.commit()
+    # for row in (open("valid_emojis.txt")):
+    #     row = row.rstrip()
+    #     this_emoji = Emoji(emoji=row)
+    #     db.session.add(this_emoji)
+    #     db.session.commit()
 
     return html
 
