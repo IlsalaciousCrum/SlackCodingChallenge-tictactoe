@@ -6,7 +6,7 @@ import os
 
 # import requests
 
-from Model import (connect_to_db, db, Game, Emoji, Player, load_emoji)
+from Model import (connect_to_db, db, Game, Emoji, Player)
 
 # ___________________________________________________________________________
 
@@ -27,7 +27,11 @@ def test():
 
     html = "<html><body>Testing testing, is this thing on?</body></html>"
 
-    load_emoji()
+    for row in (open("valid_emojis")):
+        row = row.rstrip()
+        this_emoji = Emoji(emoji=row)
+        db.session.add(this_emoji)
+        db.session.commit()
 
     return html
 
